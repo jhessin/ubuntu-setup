@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+function confirm {
+  read -r -p "$1 [y/N]" response
+  if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 # clone the repo
 if [ -d "$HOME/ubuntu-setup" ]; then
   echo Repo downloaded starting setup...
@@ -10,6 +19,10 @@ fi
 
 # install apt packages
 sudo apt -y install $(cat $HOME/ubuntu-setup/apt.packages)
+
+# install yarn and yarn packages
+npm install -g yarn
+# yarn global add $(cat $HOME/ubuntu-setup/yarn.packages)
 
 # install snap packages
 while read p; do
@@ -27,8 +40,9 @@ if [ ! -e "/usr/bin/google-chrome" ]; then
 fi
 
 # setup gh login
-echo Logging in to github - Ctrl-C if this is unnecessary
-gh auth login
+if confirm "would you like to login to gh?"; then
+  gh auth login
+fi
 
 # remap the keyboard properly
 localectl set-x11-keymap us pc105 dvp compose:102,numpad:shift3,kpdl:semi,keypad:atm,caps:escape
@@ -64,14 +78,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/i
 $HOME/.config/nvim/install.sh
 
 # configure zsh as default shell
-# chsh -s /usr/bin/zsh
+if confirm "Would you like to set zsh as your default shell?"; then
+  chsh -s /usr/bin/zsh
+fi
 
-# setup pluckey (optional)
-echo "
-You can now setup pluckeye by running the following commands.
-cd $HOME/ubuntu-setup
-pluck.installer
-
-then import the pluck settings:
-  pluck import pluck.settings
-  "
+# setup pluckeye (optional)
+if confirm "would you like to install pluckeye?"; then
+  ./pluck-setup.sh
+fi
