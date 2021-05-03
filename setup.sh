@@ -56,7 +56,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/i
 
 # setup neovim
 pip install pynvim --user
-$HOME/config/nvim/install.sh
+$HOME/.config/nvim/install.sh
 
 # configure zsh as default shell
 chsh -s /usr/bin/zsh
