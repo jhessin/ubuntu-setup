@@ -12,15 +12,19 @@ fi
 sudo apt -y install $(cat $HOME/ubuntu-setup/apt.packages)
 
 # install snap packages
-sudo snap -y install $(cat $HOME/ubuntu-setup/snap.packages)
+while read p; do
+  sudo snap install "$p"
+done < $HOME/ubuntu-setup/snap.packages
 
 # install pip packages
-pip install $(cat $HOME/ubuntu-setup/pip.packages) --user
+pip3 install $(cat $HOME/ubuntu-setup/pip.packages) --user
 
 # download google-chrome
-wget -O google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
-sudo dpkg -i google-chrome.deb
-rm -f google-chrome.deb
+if [ ! -e "/usr/bin/google-chrome" ]; then
+  wget -O google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+  sudo dpkg -i google-chrome.deb
+  rm -f google-chrome.deb
+fi
 
 # setup gh login
 echo Logging in to github - Ctrl-C if this is unnecessary
@@ -33,8 +37,10 @@ localectl set-x11-keymap us pc105 dvp compose:102,numpad:shift3,kpdl:semi,keypad
 dconf load / < $HOME/ubuntu-setup/dconf.settings
 
 # copy bin from github
-rm -rf $HOME/.local/bin
-gh repo clone jhessin/bin $HOME/.local/bin
+if [ ! -d "$HOME/.local/bin/.git" ]; then
+  rm -rf $HOME/.local/bin
+  gh repo clone jhessin/bin $HOME/.local/bin
+fi
 
 # add the bin to you path for tools
 PATH=$PATH:$HOME/.local/bin
@@ -55,11 +61,10 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # setup neovim
-pip install pynvim --user
 $HOME/.config/nvim/install.sh
 
 # configure zsh as default shell
-chsh -s /usr/bin/zsh
+# chsh -s /usr/bin/zsh
 
 # setup pluckey (optional)
 echo "

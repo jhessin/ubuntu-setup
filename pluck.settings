@@ -31,6 +31,7 @@ allow github.io
 allow githubusercontent.com
 allow godtube.com
 allow gominno.com
+allow google.com
 allow grow.google
 allow html5hive.org
 allow justwatch.com
@@ -59,6 +60,7 @@ allow stackoverflow.com
 allow stepik.org
 allow theverge.com
 allow tor.com
+allow ubuntu.com
 allow udemy.com
 allow va.gov
 allow vidangel.com
