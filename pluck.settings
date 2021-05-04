@@ -29,6 +29,7 @@ allow ggpht.com
 allow github.com
 allow github.io
 allow githubusercontent.com
+allow gitignore.io
 allow godtube.com
 allow gominno.com
 allow google.com
@@ -40,6 +41,7 @@ allow localhost
 allow mozilla.org
 allow myfedloan.org
 allow nextmd.com
+allow npmjs.org
 allow onechartpatient.com
 allow openscriptures.org
 allow pay.gov
@@ -59,6 +61,7 @@ allow speedtest.net
 allow stackoverflow.com
 allow stepik.org
 allow theverge.com
+allow toptal.com
 allow tor.com
 allow ubuntu.com
 allow udemy.com
@@ -66,6 +69,7 @@ allow va.gov
 allow vidangel.com
 allow w3schools.com
 allow watchgofish.com
+allow yarnpkg.com
 allow zendesk.com
 allow zenva.com
 allow 10.0.0.1
