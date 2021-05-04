@@ -17,6 +17,8 @@ else
   git clone https://github.com/jhessin/ubuntu-setup.git $HOME/ubuntu-setup
 fi
 
+cd $HOME/ubuntu-setup
+
 # install apt packages
 sudo apt -y install $(cat $HOME/ubuntu-setup/apt.packages)
 
@@ -84,5 +86,6 @@ fi
 
 # setup pluckeye (optional)
 if confirm "would you like to install pluckeye?"; then
-  ./pluck-setup.sh
+  sh -c "$(curl -fsSL \
+    https://raw.githubusercontent.com/jhessin/pluck-setup/master/setup.sh)"
 fi
