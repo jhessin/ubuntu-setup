@@ -10,29 +10,25 @@ function confirm {
 }
 
 # clone the repo
-if [ -d "$HOME/ubuntu-setup" ]; then
+if [ -d "$HOME/setup/ubuntu-setup" ]; then
   echo Repo downloaded starting setup...
 else
   echo Downloading repo...
-  git clone https://github.com/jhessin/ubuntu-setup.git $HOME/ubuntu-setup
+  git clone https://github.com/jhessin/ubuntu-setup.git $HOME/setup/ubuntu-setup
 fi
 
-cd $HOME/ubuntu-setup
+cd $HOME/setup/ubuntu-setup
 
 # install apt packages
-sudo apt -y install $(cat $HOME/ubuntu-setup/apt.packages)
-
-# install yarn and yarn packages
-npm install -g yarn
-# yarn global add $(cat $HOME/ubuntu-setup/yarn.packages)
+sudo apt -y install $(cat $HOME/setup/ubuntu-setup/apt.packages)
 
 # install snap packages
 while read p; do
   sudo snap install "$p"
-done < $HOME/ubuntu-setup/snap.packages
+done < $HOME/setup/ubuntu-setup/snap.packages
 
 # install pip packages
-pip3 install $(cat $HOME/ubuntu-setup/pip.packages) --user
+pip3 install $(cat $HOME/setup/ubuntu-setup/pip.packages) --user
 
 # download google-chrome
 if [ ! -e "/usr/bin/google-chrome" ]; then
@@ -50,7 +46,7 @@ fi
 localectl set-x11-keymap us pc105 dvp compose:102,numpad:shift3,kpdl:semi,keypad:atm,caps:escape
 
 # import all dconf settings/gsettings
-dconf load / < $HOME/ubuntu-setup/dconf.settings
+dconf load / < $HOME/setup/ubuntu-setup/dconf.settings
 
 # copy bin from github
 if [ ! -d "$HOME/.local/bin/.git" ]; then
@@ -71,6 +67,10 @@ pushd $HOME
 gmerge dotfiles
 popd
 
+# install yarn and yarn packages
+npm install -g yarn
+yarn global add $(cat $HOME/setup/ubuntu-setup/yarn.packages)
+
 # setup zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # setup zinit
@@ -86,6 +86,7 @@ fi
 
 # setup pluckeye (optional)
 if confirm "would you like to install pluckeye?"; then
-  sh -c "$(curl -fsSL \
-    https://raw.githubusercontent.com/jhessin/pluck-setup/master/setup.sh)"
+  gh repo clone jhessin/pluck-setup $HOME/setup/pluck-setup
+  cd $HOME/setup/pluck-setup
+  ./setup.sh
 fi
