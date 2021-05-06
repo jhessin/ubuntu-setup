@@ -41,8 +41,3 @@ center-new-windows=true
 
 [org/gnome/settings-daemon/plugins/media-keys]
 screensaver=['<Primary><Alt>q']
-
-[org/gnome/shell]
-enabled-extensions=['background-logo@fedorahosted.org', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com']
-favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'firefox.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
-welcome-dialog-last-shown-version='40.0'

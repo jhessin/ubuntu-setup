@@ -68,6 +68,7 @@ gmerge dotfiles
 popd
 
 # install yarn and yarn packages
+npm install -g npm
 npm install -g yarn
 yarn global add $(cat $HOME/setup/ubuntu-setup/yarn.packages)
 
