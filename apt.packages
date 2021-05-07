@@ -1,3 +1,11 @@
+build-essential
+libncursesw5-dev
+uuid-dev
+zlib1g-dev
+ruby-full
+rubygems
+rake
+
 neovim
 tmux
 curl
@@ -22,3 +30,4 @@ tig
 zoom
 archivemount
 gnome-clocks
+gnupg2
