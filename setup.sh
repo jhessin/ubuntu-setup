@@ -22,6 +22,9 @@ cd $HOME/setup/ubuntu-setup
 # install apt packages
 sudo apt -y install $(cat $HOME/setup/ubuntu-setup/apt.packages)
 
+# install ruby gems
+gem install --user $(cat $HOME/setup/ubuntu-setup/gem.packages)
+
 # install snap packages
 while read p; do
   sudo snap install "$p"
