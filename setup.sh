@@ -22,6 +22,11 @@ cd $HOME/setup/ubuntu-setup
 # install apt packages
 sudo apt -y install $(cat $HOME/setup/ubuntu-setup/apt.packages)
 
+# install rustup and cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+export PATH=$HOME/.cargo/bin:$PATH
+cargo install $(cat $HOME/setup/ubuntu-setup/cargo.packages)
+
 # install ruby gems
 gem install --user $(cat $HOME/setup/ubuntu-setup/gem.packages)
 
