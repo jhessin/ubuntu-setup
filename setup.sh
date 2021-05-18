@@ -66,13 +66,14 @@ fi
 PATH=$PATH:$HOME/.local/bin
 
 # copy config from github
-pushd $HOME/.config
-gmerge .config
-popd
+#pushd $HOME/.config
+#gmerge .config
+#popd
 
-# copy dotfiles from github
+# copy dotfiles from github along with .config hopefully
 pushd $HOME
 gmerge dotfiles
+git submodule update --init --recursive
 popd
 
 # install nvm, npm, yarn and yarn packages
