@@ -75,7 +75,8 @@ pushd $HOME
 gmerge dotfiles
 popd
 
-# install yarn and yarn packages
+# install nvm, npm, yarn and yarn packages
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 npm install -g npm
 npm install -g yarn
 yarn global add $(cat $HOME/setup/ubuntu-setup/yarn.packages)
