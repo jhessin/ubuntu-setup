@@ -30,6 +30,12 @@ cargo install $(cat $HOME/setup/ubuntu-setup/cargo.packages)
 # install ruby gems
 gem install --user $(cat $HOME/setup/ubuntu-setup/gem.packages)
 
+# install linuxbrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# install linuxbrew packages
+brew install $(cat $HOME/setup/ubuntu-setup/brew.packages)
+
 # install snap packages
 while read p; do
 	sudo snap install "$p"

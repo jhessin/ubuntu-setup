@@ -33,3 +33,4 @@ offlineimap
 msmtp
 sqlite
 zsh-syntax-highlighting
+libnss3-tools
